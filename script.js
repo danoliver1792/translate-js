@@ -3,6 +3,7 @@ const textareaTo = document.querySelector("#textareaTo");
 const btnTranslate = document.querySelector("#btnTranslate");
 const selects = document.querySelectorAll("select");
 
+// dicionario de idiomas
 const countries = {
     "en-GB": "Inglês",
     "es-ES": "Espanhol",
@@ -11,6 +12,7 @@ const countries = {
     "pt-BR": "Português",
 };
 
+// verificando a classe dos elementos para determinar se eles são de origem ou destino
 selects.forEach((tag) => {
     for (let country in countries) {
         let selected;
@@ -28,6 +30,7 @@ selects.forEach((tag) => {
     }
 });
 
+// criando um evento para verificar o valor no campo de entrada e traduzir
 btnTranslate.addEventListener("click", () => {
     if (textareaFrom.value) {
         loadTranslation();
@@ -36,6 +39,7 @@ btnTranslate.addEventListener("click", () => {
     }
 });
 
+// função para fazer a tradução com a API do MyMemory
 function loadTranslation() {
     fetch (
             `https://api.mymemory.translated.net/get?q=${textareaFrom.value}&langpair=${selects[0].value}|${selects[1].value}`
